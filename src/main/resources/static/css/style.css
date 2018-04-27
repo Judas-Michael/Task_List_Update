@@ -1,0 +1,23 @@
+body {
+    margin: 25px;
+}
+
+.urgent-icon {
+    height: 25px;
+}
+
+.done-task {
+    text-decoration: line-through;
+    font-style: italic;
+    color: gray;
+}
+
+div.delete-button-div > button.button-delete {
+    color: #FA6C03;
+    border: 0.1rem solid #FA6C03;
+}
+
+
+#flash-message {
+    color: darkgreen;
+}
