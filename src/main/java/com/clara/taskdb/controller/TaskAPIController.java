@@ -5,12 +5,9 @@ import com.clara.taskdb.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.html.HTMLParagraphElement;
- 
+
 import java.util.List;
 
 @RestController
@@ -44,5 +41,22 @@ public class TaskAPIController {
     public ResponseEntity<List<Task>> queryTasks() {
         return new ResponseEntity<>(tasks.findAllByOrderByUrgentDesc(), HttpStatus.OK);
     }
+
+    @PatchMapping(value="/completed")
+    public ResponseEntity markTaskAsCompleted(@RequestBody Task task){
+
+        int tasksUpdated = tasks.setTaskCompleted(task.isCompleted(), task.getId());
+        if (tasksUpdated == 0) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND); //this happens if the task doesn't exist
+        }
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping(value="/delete")
+    public ResponseEntity deleteTask(@RequestBody Task task) {
+        tasks.delete(task);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }
 

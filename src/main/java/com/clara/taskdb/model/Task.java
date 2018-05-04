@@ -27,4 +27,11 @@ public class Task {
 
     }
 
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
