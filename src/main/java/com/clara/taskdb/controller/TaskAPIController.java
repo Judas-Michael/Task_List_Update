@@ -27,32 +27,32 @@ public class TaskAPIController {
         tasks.save(new Task("task 4", false, false));
     }
 
-    @PostMapping(value="/add")
+    @PostMapping(value="/add") //adds task
     public ResponseEntity addTask(@RequestBody Task task) {
         System.out.println("new task" + task);
         try{
             tasks.save(task);
         } catch (Exception e) {
-            return new ResponseEntity<>("Task object is invalid", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Task object is invalid", HttpStatus.BAD_REQUEST); //catches bad requests to add items
         }
         return new ResponseEntity(HttpStatus.CREATED);
     }
-    @GetMapping("/tasks")
+    @GetMapping("/tasks") //lists all tasks in order of urgency
     public ResponseEntity<List<Task>> queryTasks() {
         return new ResponseEntity<>(tasks.findAllByOrderByUrgentDesc(), HttpStatus.OK);
     }
 
-    @PatchMapping(value="/completed")
+    @PatchMapping(value="/completed") //looks at completed tasks
     public ResponseEntity markTaskAsCompleted(@RequestBody Task task){
 
         int tasksUpdated = tasks.setTaskCompleted(task.isCompleted(), task.getId());
-        if (tasksUpdated == 0) {
+        if (tasksUpdated == 0) { //if that task doesn't exist nothing is returned
             return new ResponseEntity(HttpStatus.NOT_FOUND); //this happens if the task doesn't exist
         }
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping(value="/delete")
+    @DeleteMapping(value="/delete") //deleted tasks in list
     public ResponseEntity deleteTask(@RequestBody Task task) {
         tasks.delete(task);
         return new ResponseEntity(HttpStatus.OK);

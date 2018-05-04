@@ -23,15 +23,15 @@ public class Task {
     private boolean urgent;
     private boolean completed = false;
 
-    public Task(String s, boolean b, boolean b1) {
+    public Task(String s, boolean b, boolean b1) { //initializes task objects this constructor takes strings and booleans
 
     }
 
-    public boolean isCompleted() {
+    public boolean isCompleted() { //returns boolean for completion
         return completed;
     }
 
-    public Long getId() {
+    public Long getId() { //gets id
         return id;
     }
 }

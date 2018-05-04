@@ -9,7 +9,7 @@ public class TaskController {
 
     @GetMapping("/")
     public String homePage(){
-        return "index.html";
+        return "index.html"; //returns index of homepage
     }
 }
 

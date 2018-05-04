@@ -17,6 +17,6 @@ import java.util.List;
         @Transactional
         @Modifying
         @Query("Update Task t set t.completed = ?1 where t.id = ?2")
-        int setTaskCompleted(boolean completed, long id);
+        int setTaskCompleted(boolean completed, long id); //extention of task. updates items and queries location and details
 
     }
